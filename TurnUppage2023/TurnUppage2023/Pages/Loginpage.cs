@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 
 
-namespace IcTurnUpFeb2023.Pages
+namespace TurnUppage2023.Pages
 {
     public class Loginpage
     {
-        public void liginactions(IWebDriver driver)
+        public void loginactions(IWebDriver driver)
         {
 
             driver.Manage().Window.Maximize();
