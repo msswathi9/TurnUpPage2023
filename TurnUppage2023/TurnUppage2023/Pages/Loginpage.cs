@@ -23,15 +23,17 @@ namespace TurnUppage2023.Pages
             //Identify Username text box and give inputs
             IWebElement usernameTextbox = driver.FindElement(By.Id("UserName"));
             usernameTextbox.SendKeys("hari");
+            Thread.Sleep(2000);
 
             //Identify Password text box and give inputs
             IWebElement passwordTextbox = driver.FindElement(By.Id("Password"));
             passwordTextbox.SendKeys("123123");
+            Thread.Sleep(2000);
 
             // Identify login button and click on login button
             IWebElement loginbutton = driver.FindElement(By.XPath("//*[@id=\"loginForm\"]/form/div[3]/input[1]"));
             loginbutton.Click();
-
+            Thread.Sleep(2000);
         }
 
     }

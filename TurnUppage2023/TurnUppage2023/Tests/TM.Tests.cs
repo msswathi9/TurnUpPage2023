@@ -12,49 +12,38 @@ using OpenQA.Selenium;
 namespace TurnUppage2023.Tests
 {
     [TestFixture]
+    [Parallelizable]
     public class TM_tests: CommonDriver
     {
-        [SetUp]
-        public void LoginSteps() 
-        {
-            driver = new ChromeDriver();
+        //TM page object initialization and defination
+        Homepage homePageobj = new Homepage();
+        TMpage tmPageobj = new TMpage();
 
-         // Login Page object initialization and defination
-            Loginpage logInPageobj = new Loginpage();
-            logInPageobj.loginactions(driver);
-
-         //Home page object initialization and defination
-            Homepage homePageobj = new Homepage();
-            homePageobj.GotoTMpage(driver);
-        }
-        [Test,Order(1)]
+    [Test,Order(1), Description("Check if user is able to creat new record")]
         public void createTMTest() 
         {
-         //TM page object initialization and defination
-           TMpage tmPageobj = new TMpage();
-           tmPageobj.CreateTM(driver);
+            //Home page object initialization and defination
+           
+            homePageobj.GotoTMpage(driver);
+            tmPageobj.CreateTM(driver);
 
         }
-        [Test,Order(2)]
+    [Test,Order(2), Description("Check if user is able to edit the existing record")]
         public void EditTMTest() 
         {
-            //TM page object initialization and defination
-            TMpage tmPageobj = new TMpage();
             //Edit tm
+
+            homePageobj.GotoTMpage(driver);
             tmPageobj.EditTm(driver);
         }
-        [Test, Order(3)]
-         public void DeleteTMTest() 
+    [Test, Order(3), Description("Check if user able to to delete the exisiting record")]
+        public void DeleteTMTest() 
         {
-            //TM page object initialization and defination
-            TMpage tmPageobj = new TMpage();
             //Delete Tm
+
+            homePageobj.GotoTMpage(driver);
             tmPageobj.DeleteTm(driver);
         }
-        [TearDown]
-        public void CloseTestRun()
-        {
-            driver.Quit();
-        }
+        
     }
 }

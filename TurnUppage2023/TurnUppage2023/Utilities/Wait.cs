@@ -17,7 +17,7 @@ namespace TurnUppage2023.Utilities
             var Wait = new WebDriverWait(driver, new TimeSpan(0, 0, seconds));
             if (locatortype == "XPath")
             {
-                Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(locatorValue)));
+               // Wait.Until(SeleniumExtras.WaitHelpers.ExpectedConditions.ElementToBeClickable(By.XPath(locatorValue)));
             }
             if (locatortype == "Id")
             {
