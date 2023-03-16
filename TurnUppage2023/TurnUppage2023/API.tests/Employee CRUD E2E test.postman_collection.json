@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "58b1e288-8f96-416c-b793-65b0388a0874",
+		"name": "Employee CRUD E2E test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26345218"
+	},
+	"item": [
+		{
+			"name": "Create new employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"  //Assert1-Check status code success\r",
+							"pm.test(\"Check Status code is success\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//Assert2-Check key-value\r",
+							"pm.test(\"check key-value pair in the response\"), function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    //Name check \r",
+							"    pm.expect(jsonData.data.name).to.eql(\"Swathi9\");\r",
+							"\r",
+							"   //Salary check \r",
+							"   pm.expect(jsonData.data.salary).to.eql(\"123\");\r",
+							"\r",
+							"   //Age check \r",
+							"   pm.expect(jsonData.data.age).to.eql(\"23\");\r",
+							"\r",
+							"    pm.environment.set(\"employeeID\",jsonData.data.id);\r",
+							"\r",
+							"};"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Swathi9\",\r\n    \"salary\": \"123\",\r\n    \"age\": \"23\"\r\n}"
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/create",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update new employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"  //Assert1-Check status code success\r",
+							"pm.test(\"Check Status code is success\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//Assert2-Check key-value\r",
+							"pm.test(\"check key-value pair in the response\"), function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    //Name check \r",
+							"    pm.expect(jsonData.data.name).to.eql(\"Swathi9\");\r",
+							"\r",
+							"   //Salary check \r",
+							"   pm.expect(jsonData.data.salary).to.eql(\"123\");\r",
+							"\r",
+							"   //Age check \r",
+							"   pm.expect(jsonData.data.age).to.eql(\"25\");\r",
+							"\r",
+							"};"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Swathi9\",\r\n    \"salary\": \"123\",\r\n    \"age\": \"25\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/update/{{employeeID}}",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"update",
+						"{{employeeID}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete employee",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//Check status code is success\r",
+							"pm.test(\"check Status code is success \", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"//Check key-value response\r",
+							"pm.test(\"check key-value pair in the response\"), function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"\r",
+							"    //Status check\r",
+							"    pm.expect(jsonData.status).to.eql(\"success\");\r",
+							"\r",
+							"    //Data check\r",
+							"    pm.expect(jsonData.data).to.eql(pm.environment.unset(\"employeeID\").toString());\r",
+							"\r",
+							"    //Message check\r",
+							"    pm.expect(jsonData.message).to.eql(\"Successfully! Record has been deleted\");\r",
+							"\r",
+							"\r",
+							"};"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://dummy.restapiexample.com/api/v1/delete/{{employeeID}}",
+					"protocol": "https",
+					"host": [
+						"dummy",
+						"restapiexample",
+						"com"
+					],
+					"path": [
+						"api",
+						"v1",
+						"delete",
+						"{{employeeID}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

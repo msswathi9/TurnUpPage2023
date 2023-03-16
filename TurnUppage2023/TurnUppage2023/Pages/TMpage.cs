@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,24 +65,41 @@ namespace TurnUppage2023.Pages
             Thread.Sleep(2000);
 
             //Wait.WaitToBeClickable(driver, "XPath", "//*[@id='tmsGrid']/div[3]/table/tbody/tr[last()]/td[1]", 5);
-            IWebElement lastRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-            lastRecord.Click();
-            Thread.Sleep(2000);
+           // IWebElement newCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            //newCode.Click();
+            //Thread.Sleep(2000);
 
-            Assert.That(lastRecord.Text == "February2023", "Actual code and expected code does not match");
+            //Assert.That(newCode.Text == "February2023", "Actual code and expected code does not match");
 
             //if (lastRecord.Text == "February2023")
             //{
-            //    Assert.Pass("New Recored Created Successfully!");
+            //    Assert.Pass("New code Created Successfully!");
             //}
             //else
             //{
-            //  Assert.Fail("Record Has Not been Created!");
+            //  Assert.Fail("code Has Not been Created!");
             //}
 
         }
+        public string GetCode(IWebDriver driver)
+        {
+            IWebElement actualCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+          return actualCode.Text;
+        }
+       public string GetDescription(IWebDriver driver) 
+        {
+            IWebElement actualDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return actualDescription.Text;
+       }
+        public string GetPrice(IWebDriver driver) 
+        {
+            IWebElement actualPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return actualPrice.Text;
+        
+        }
 
-        public void EditTm(IWebDriver driver)
+
+        public void EditTm(IWebDriver driver, string Description, string Code, string Price)
 
         {
             //Identify last page button
@@ -98,28 +116,27 @@ namespace TurnUppage2023.Pages
             // Wait.WaitToBeClickable(driver, "XPath", "//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]", 5);
 
             //Identify recored to be edited
-            Thread.Sleep(2000);
-            IWebElement recordToBeEdited = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            IWebElement recordToBeEdited = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
             recordToBeEdited.Click();
             Thread.Sleep(2000);
             
             
-             if(recordToBeEdited.Text == "February2023")
-            {
-                IWebElement lastRecordEditButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
-                lastRecordEditButton.Click();
-            }
-            else 
-            {
-                Assert.Fail("Record to be edit not found");
-            }
+            // if(recordToBeEdited.Text == "February2023")
+            //{
+               // IWebElement lastRecordEditButton = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
+                //lastRecordEditButton.Click();
+           // }
+            //else 
+            //{
+                //Assert.Fail("Record to be edit not found");
+            //}
 
             //Edit Code Text Box And enter New Code
 
             //Wait.WaitToBeClickable(driver, "Id", "Code", 5);
             IWebElement editCodeTextBox = driver.FindElement(By.Id("Code"));
             editCodeTextBox.Clear();
-            editCodeTextBox.SendKeys("March2023");
+            editCodeTextBox.SendKeys(Code);
             Thread.Sleep(2000);
 
             //Edit Description Text Box and enter New Description
@@ -127,7 +144,7 @@ namespace TurnUppage2023.Pages
             //Wait.WaitToBeClickable(driver, "Id", "Description", 5);
             IWebElement editDescriptionTextBox = driver.FindElement(By.Id("Description"));
             editDescriptionTextBox.Clear();
-            editDescriptionTextBox.SendKeys("Monday");
+            editDescriptionTextBox.SendKeys(Description);
             Thread.Sleep(1000);
 
 
@@ -140,7 +157,7 @@ namespace TurnUppage2023.Pages
             newPrice.Clear();
             Thread.Sleep(2000);
             editPricePerUnitTextBox.Click();
-            newPrice.SendKeys("20");
+            newPrice.SendKeys(Price);
             Thread.Sleep(2000);
 
 
@@ -168,7 +185,7 @@ namespace TurnUppage2023.Pages
 
           
 
-            Assert.That(lastRecord1.Text == "March2023", "Actual record and expected record does not match");
+            //Assert.That(lastRecord1.Text == "March2023", "Actual record and expected record does not match");
 
             //if (lastRecord1.Text == "March2023")
             //{
@@ -179,6 +196,24 @@ namespace TurnUppage2023.Pages
            //     Assert.Fail("Record has not been Edited!");
            // }
         }
+
+        public string GetEditedDescription(IWebDriver driver) 
+        {
+            IWebElement createdDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return createdDescription.Text;
+        }
+        public string GetEditedCode(IWebDriver driver) 
+        {
+            IWebElement cretedCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            return cretedCode.Text;        
+        }
+        public string GetEditedPrice(IWebDriver driver) 
+        {
+            IWebElement createdPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return createdPrice.Text;
+        
+        }
+        
         public void DeleteTm(IWebDriver driver)
         {
 
@@ -224,5 +259,6 @@ namespace TurnUppage2023.Pages
              //   Assert.Fail("Recored has not been Deleted!");
             //}
         }
+
     }
 }

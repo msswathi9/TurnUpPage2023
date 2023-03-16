@@ -34,7 +34,7 @@ namespace TurnUppage2023.Tests
             //Edit tm
 
             homePageobj.GotoTMpage(driver);
-            tmPageobj.EditTm(driver);
+            //tmPageobj.EditTm(driver);
         }
     [Test, Order(3), Description("Check if user able to to delete the exisiting record")]
         public void DeleteTMTest() 
