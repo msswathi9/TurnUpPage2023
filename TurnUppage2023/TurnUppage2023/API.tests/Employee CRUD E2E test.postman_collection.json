@@ -17,8 +17,9 @@
 							"pm.test(\"Check Status code is success\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
+							"\r",
 							"//Assert2-Check key-value\r",
-							"pm.test(\"check key-value pair in the response\"), function () {\r",
+							"pm.test(\"check key-value pair in the response\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"\r",
 							"    //Name check \r",
@@ -30,9 +31,10 @@
 							"   //Age check \r",
 							"   pm.expect(jsonData.data.age).to.eql(\"23\");\r",
 							"\r",
-							"    pm.environment.set(\"employeeID\",jsonData.data.id);\r",
+							"   //Setting an environment variable\r",
 							"\r",
-							"};"
+							"    pm.environment.set(\"employeeID\", jsonData.data.id);\r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -43,7 +45,12 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Swathi9\",\r\n    \"salary\": \"123\",\r\n    \"age\": \"23\"\r\n}"
+					"raw": "{\r\n    \"name\": \"Swathi9\",\r\n    \"salary\": \"123\",\r\n    \"age\": \"23\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "https://dummy.restapiexample.com/api/v1/create",
@@ -73,8 +80,9 @@
 							"pm.test(\"Check Status code is success\", function () {\r",
 							"    pm.response.to.have.status(200);\r",
 							"});\r",
+							"\r",
 							"//Assert2-Check key-value\r",
-							"pm.test(\"check key-value pair in the response\"), function () {\r",
+							"pm.test(\"check key-value pair in the response\", function () {\r",
 							"    var jsonData = pm.response.json();\r",
 							"\r",
 							"    //Name check \r",
@@ -86,7 +94,8 @@
 							"   //Age check \r",
 							"   pm.expect(jsonData.data.age).to.eql(\"25\");\r",
 							"\r",
-							"};"
+							"   \r",
+							"});"
 						],
 						"type": "text/javascript"
 					}
@@ -145,8 +154,6 @@
 							"\r",
 							"    //Message check\r",
 							"    pm.expect(jsonData.message).to.eql(\"Successfully! Record has been deleted\");\r",
-							"\r",
-							"\r",
 							"};"
 						],
 						"type": "text/javascript"
@@ -156,6 +163,15 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "https://dummy.restapiexample.com/api/v1/delete/{{employeeID}}",
 					"protocol": "https",
